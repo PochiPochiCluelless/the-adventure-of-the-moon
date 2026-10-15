@@ -35,8 +35,8 @@ button{font:inherit;color:var(--ink);background:var(--panel);border:2px solid va
   -webkit-tap-highlight-color:transparent;touch-action:manipulation}
 button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
 button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.ov{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(8,6,14,.66);padding:10px;overflow:auto}
-.box{background:var(--panel);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:14px;max-width:min(520px,96%);text-align:center}
+.ov{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;background:rgba(8,6,14,.66);padding:10px;overflow:auto;-webkit-overflow-scrolling:touch}
+.box{background:var(--panel);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:14px;max-width:min(520px,96%);text-align:center;margin:auto}
 .box h2{font-size:1.1rem;margin:0 0 6px;font-weight:400}
 .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:12px}
 .title{background:none;justify-content:flex-start;align-items:flex-start;padding:0}
@@ -45,7 +45,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .tw{padding:12% 0 0 8%;color:#fff3e4;display:flex;flex-direction:column;align-items:flex-start;gap:22px}
 .tw h1{margin:0;font-weight:400;font-size:clamp(1.8rem,6vw,3.4rem);letter-spacing:.08em;line-height:1.25;text-shadow:0 0 22px rgba(255,170,100,.7)}
 #go{background:rgba(20,10,20,.65);color:#fff3e4;border-color:#ffb27a;box-shadow:3px 3px 0 #000;font-size:1.1rem;padding:10px 30px;letter-spacing:.2em}
-.rules{list-style:none;margin:6px 0 8px;padding:0;text-align:left;line-height:1.9;font-size:.95rem}
+.rules{list-style:none;margin:6px 0 8px;padding:0;text-align:left;line-height:1.7;font-size:.88rem}
 .rules b{font-weight:400;color:var(--accent)}
 #talk{position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:12px;align-items:center;background:rgba(14,10,22,.92);color:#f4efe8;border:2px solid #ffcf9c;padding:10px 12px;cursor:pointer;min-height:92px}
 #tface{width:72px;height:72px;object-fit:cover;border:2px solid #ffcf9c;flex:none;background:#222}
@@ -69,12 +69,16 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .itemlist b{font-weight:400;display:block}
 .itemlist small{color:var(--muted)}
 #man{position:absolute;right:72px;top:8px;z-index:6;min-height:34px;padding:2px 10px;font-size:.78rem;background:rgba(20,14,26,.72);color:#ffe4c8;border-color:#ffb27a;box-shadow:2px 2px 0 #000}
+.itemlist li.owned{opacity:.62}
+.itemlist li.owned b{color:#9be39b}
 .itemlist li.sec{display:block;border:0;background:none;padding:8px 2px 0;font-size:.78rem;letter-spacing:.2em;color:var(--muted)}
 #skipend{position:absolute;right:8px;bottom:8px;z-index:6;min-height:34px;padding:2px 12px;font-size:.78rem;background:rgba(20,14,26,.72);color:#ffe4c8;border-color:#ffb27a;box-shadow:2px 2px 0 #000}
 #tbk{position:absolute;right:146px;top:8px;z-index:6;min-height:34px;padding:2px 10px;font-size:.78rem;background:rgba(20,14,26,.72);color:#ffe4c8;border-color:#ffb27a;box-shadow:2px 2px 0 #000}
 #errbox{position:absolute;left:6px;right:6px;bottom:6px;z-index:9;padding:6px 10px;background:rgba(120,20,30,.92);color:#fff;font-size:.72rem;line-height:1.4;border:2px solid #ffb0b0;cursor:pointer;word-break:break-all}
+#kbnote{position:absolute;left:50%;transform:translateX(-50%);bottom:84px;z-index:8;padding:6px 12px;background:rgba(40,30,10,.92);color:#ffe9a0;font-size:.78rem;border:2px solid #ffd27a;pointer-events:none;white-space:nowrap}
 #snd{position:absolute;right:8px;top:8px;z-index:6;min-height:34px;padding:2px 10px;font-size:.78rem;background:rgba(20,14,26,.72);color:#ffe4c8;border-color:#ffb27a;box-shadow:2px 2px 0 #000}
 #cv{touch-action:none}
+#how,#confirm,#items,#shop{padding-top:52px}
 #touch{position:absolute;left:0;right:0;bottom:0;height:0;pointer-events:none;z-index:5}
 #touch .tb{position:absolute;pointer-events:auto;width:54px;height:54px;border-radius:50%;padding:0;min-height:0;background:rgba(20,14,26,.55);color:#fff;border:2px solid rgba(255,220,180,.6);box-shadow:none;font-size:.95rem}
 @media (pointer:fine){#touch{display:none}}
@@ -123,7 +127,8 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       </div>
 
       <div class="ov" id="shop" hidden>
-        <div class="box"><h2 id="shname">shop</h2><p class="hint" id="shgold"></p><ul class="itemlist" id="shlist"></ul><div class="row"><button id="shclose" type="button">close</button></div></div>
+        <div class="box"><h2 id="shname">shop</h2><p class="hint" id="shgold"></p>
+          <p id="shmsg" class="hint" style="min-height:1.4em;color:#a8501e;font-weight:600"></p><ul class="itemlist" id="shlist"></ul><div class="row"><button id="shclose" type="button">close</button></div></div>
       </div>
 
       <div id="ulttext" aria-hidden="true"></div>
@@ -145,6 +150,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       <button id="skipend" type="button" hidden>skip</button>
       <button id="snd" type="button" aria-label="toggle sound">♪ ON</button>
       <div id="errbox" hidden></div>
+      <div id="kbnote" hidden>画面を一度クリックすると、キーボードで操作できます</div>
     </div>
   </section>
 </main>
@@ -158,6 +164,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
   function reportErr(m) { try { m = String(m); if (/ResizeObserver/.test(m)) return; const b = document.getElementById('errbox'); b.textContent = 'error: ' + m.slice(0, 240) + '  (tap to close)'; b.hidden = false; } catch (e) {} }
   addEventListener('error', e => reportErr((e.message || 'unknown') + (e.lineno ? ' @' + e.lineno : '')));
   addEventListener('unhandledrejection', e => reportErr((e.reason && e.reason.message) || e.reason));
+  addEventListener('pointerdown', () => { try { window.focus(); } catch (e) {} if (typeof S !== 'undefined' && S) S.afk = 0; }, true);
+  addEventListener('keydown', () => { if (typeof S !== 'undefined' && S) S.afk = 0; document.getElementById('kbnote').hidden = true; }, true);
+  addEventListener('focus', () => { document.getElementById('kbnote').hidden = true; });
   document.getElementById('errbox').addEventListener('click', e => { e.currentTarget.hidden = true; });
   try { document.fonts.load('14px "Shippori Mincho"'); document.fonts.load('600 14px "Shippori Mincho"'); } catch (e) {}
   const cv = $('cv'), ctx = cv.getContext('2d'), stageEl = $('stage');
@@ -449,7 +458,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           NP(20, 6, '#8a6aa8', '#4a3020', [{ w: '首を傾げる少女', t: '可笑しいなと思ったら、首を傾げてみて。(スペースキー)' }, { w: '首を傾げる少女', t: '壁の向こうが、見えることがあるの。' }]),
           NP(28, 6, '#5a8aa8', '#6a6a6a', [{ w: '買い物客', t: 'このアーケード、昨日より長くなってない?' }, { w: '買い物客', t: '…まあ、いいか。' }, { w: '買い物客', t: '線路の奥の壁に、灯りが三つ並んでるんだって。夕焼けみたいに、真ん中から、灯すらしいよ。' }])],
         enemies: [], objs: [], act: {}, tilts: [{ x: at(24, 8).x, y: at(24, 8).y, r: 150, done: false, fn: 'secret' }] };
-      for (const [sx, nm] of [[5, 'アロンアルファ屋'], [11, '道具屋'], [17, '武器屋'], [23, '盾屋']]) W.arcade.objs.push({ kind: 'sign', x: sx * T + 24, y: 3 * T - 8, text: nm, done: true });
+      for (const [sx, nm] of [[5, 'アロンアルファ屋'], [11, '道具屋'], [17, '武器屋'], [23, '盾屋']]) W.arcade.objs.push({ kind: 'sign', x: sx * T + 24, y: 2 * T - 8, text: nm, done: true });
     }
     // --- 記憶が摺り抜ける線路 ---
     { const w = 30, h = 16, g = grid(w, h, '#');
@@ -476,7 +485,8 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       W.sanctum = { id: 'sanctum', W: w, H: h, g, theme: 'sanctum', music: 'dungeon', tint: 'rgba(120,40,90,0.18)', warps: {}, npcs: [], enemies: [], objs: [], act: {}, boss: null };
     }
     // --- 敵・物の配置 ---
-    const E = (m, type, tx, ty) => W[m].enemies.push(mkEnemy(type, tx, ty));
+    const TIERS = { train: 0, garden: 1, dungeon: 2, arcade: 3, track: 4, sky: 5, lift: 5, sanctum: 6 };
+    const E = (m, type, tx, ty) => { const e = mkEnemy(type, tx, ty), t = TIERS[m] || 0; e.tier = t; e.maxhp = Math.ceil(e.hp * (1 + 0.3 * t)); e.hp = e.maxhp; e.spd *= 1 + 0.05 * t; e.dmg = Math.max(e.dmg, Math.round(e.dmg * (1 + 0.18 * t) * 2) / 2); W[m].enemies.push(e); };
     E('train', 'bag', 5, 4); E('train', 'bag', 11, 4);
     for (const [x, y] of [[8, 10], [14, 12], [18, 8], [23, 10]]) E('garden', 'kage', x, y);
     for (const [x, y] of [[12, 7], [16, 7], [14, 12]]) E('dungeon', 'shard', x, y);
@@ -529,11 +539,11 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     const NPC2 = (id, tx, ty, col, hair, lines) => W[id].npcs.push({ x: at(tx, ty).x, y: at(tx, ty).y, col, hair, lines });
     NPC2('arcade', 8, 6, '#4a6ab0', '#1a1a22', [{ w: '青いスカートの女性', t: '誰にも話し掛けず、誰を探すわけでもなく。…ただ、歩いているの。' }, { w: '青いスカートの女性', t: '歩いていれば、いつか誰かと、すれ違うでしょう。' }]);
     NPC2('arcade', 17, 6, '#7ab05a', '#3a2a1a', [{ w: '男の子', t: 'このブロッコリー、握ってないと落ち着かないんだ。' }, { w: '男の子', t: '…まさか、噛まないよ。多分。' }]);
-    NPC2('arcade', 24, 6, '#8a7a5a', '#8a8a8a', [{ w: null, t: '茶けた毛布に包まって、犬が眠っている。' }, { w: '黒ずんだ老人', t: 'こいつは、臭いに無頓着でね。…犬としての誇りを、失わなけりゃいいんだが。' }]);
+    NPC2('arcade', 24, 6, '#8a7a5a', '#8a8a8a', [{ w: null, t: '茶けた毛布に包まって、犬が眠っている。' }]);
     NPC2('arcade', 31, 6, '#3a3a4a', '#222', [{ w: '背広の男', t: 'コロッケを齧りながら、繰り返し、行って、来る。' }, { w: '背広の男', t: 'それが、この通りの歩き方さ。' }]);
-    NPC2('garden', 14, 11, '#c87a5a', '#222', [{ w: '子供', t: 'ブランコから降りたら、どこへ行くのも勝手なんだって。' }, { w: '子供', t: 'マッチ箱はね、擦る度に軽くなるの。いつか無くなって、棄てられる。' }, { w: '子供', t: '悲しみでも入れてあげれば、マラカスにはなるけど。' }, { w: '子供', t: 'アーケードの隅に、うきわかもめのマッチ箱が落ちてたよ。' }]);
-    NPC2('garden', 18, 7, '#a85a7a', '#d8d8d8', [{ w: '桃売りのおばあさん', t: '昔話を一つ、聞いて行くかい。' }, { w: '桃売りのおばあさん', t: '小さな田舎町の片隅に、掘っ立て小屋があってね。庭には、桃の木が伸びていた。' }, { w: '桃売りのおばあさん', t: '少女は、そこで生まれて育った。猟師の父が獲った山鳩や兎を、街まで売りに行くのが仕事だった。' }, { w: '桃売りのおばあさん', t: '「山鳩。兎。大きな猪はいりませんか」…そう声を張り上げてね。' }, { w: '桃売りのおばあさん', t: '父が死んで、少女は亡骸を、桃の木の下へ埋めた。母は、椅子に座ったきり、動かなくなった。' }, { w: '桃売りのおばあさん', t: '食べ物が尽きた頃、桃の木が、初めて大きな実をつけた。少女は、父の魂が宿ったのだと感じた。' }, { w: '桃売りのおばあさん', t: '「大きな桃はいりませんか」…桃は、沢山売れた。' }, { w: '桃売りのおばあさん', t: '少女は、男の子を育てて、たった一つのことを教えたんだよ。「大きな何かを、手に入れなさい」って。' }, { w: '桃売りのおばあさん', t: '小屋は、まだ無くならずに。今でも、大きくなった男の子と、小さく萎んだ少女が、そこで暮らしている。' }, { w: '桃売りのおばあさん', t: '…さあ。その少女が誰だったかは、あんたが決めておくれ。' }]);
-    NPC2('station', 3, 5, '#6a5a8a', '#111', [{ w: '旅人', t: 'クヅメラクガミ。クガミラクヅメ。…何のことだか、自分でも分からないんだ。' }, { w: '旅人', t: '「髪は切らないの」と聞かれて、「切らない」と答えた。それだけの話さ。' }]);
+    NPC2('garden', 14, 11, '#c87a5a', '#222', [{ w: '子供', t: 'ブランコから降りたら、どこへ行くのも勝手なんだって。' }, { w: '子供', t: 'アーケードの隅に、マッチ箱が落ちてたよ。' }]);
+    NPC2('garden', 19, 11, '#a85a7a', '#d8d8d8', [{ w: '桃売りのおばあさん', t: '昔話を一つ。桃の木の下で生まれた少女が、桃を売って暮らしていた。' }, { w: '桃売りのおばあさん', t: '桃は沢山売れた。小屋は、今も残っている。…少女が誰かは、あんたが決めておくれ。' }]);
+    NPC2('station', 3, 5, '#6a5a8a', '#111', [{ w: '旅人', t: 'クヅメラクガミ。クガミラクヅメ。…何のことだか、自分でも分からないんだ。' }]);
     W.arcade.objs.push({ kind: 'chest', ...at(2, 8), item: 'match', done: false, solid: true });
     for (const id in W) W[id].pre = null;
     return W;
@@ -552,9 +562,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     shard: { hp: 2, r: 12, spd: 62, dmg: 1 }
   };
   function mkEnemy(type, tx, ty) { const d = EST[type], p = at(tx, ty); return { kind: 'enemy', type, home: true, hx: p.x, hy: p.y, x: p.x, y: p.y, hp: d.hp, r: d.r, spd: d.spd, dmg: d.dmg, kx: 0, ky: 0, stun: 0, fl: 0, ph: Math.random() * 6, t: 1 + Math.random() * 2, st: 0, dx: 0, dy: 0, dead: false }; }
-  function mkMonk() { const p = at(10, 5); return { kind: 'boss', type: 'monk', x: p.x, y: p.y, hp: 64, maxHp: 64, fireT: 1.6, ringT: 4, fl: 0, dead: false, active: false, show: true, hard: false, summoned: false, r: 44, hy: 62 }; }
-  function mkLoco() { const p = at(31, 7); return { kind: 'boss', type: 'loco', x: p.x, y: p.y, hp: 58, maxHp: 58, st: 'idle', t: 1.8, steamT: 2.4, face: -1, cdx: 0, cdy: 0, fl: 0, dead: false, active: false, show: false, hard: false, summoned: false, r: 46, hy: 40 }; }
-  function mkBoss() { const p = at(29, 9); return { kind: 'boss', type: 'cat', show: false, x: p.x, y: p.y, hp: 50, maxHp: 50, st: 'walk', t: 2.5, leapT: 2.6, shardT: 2.8, face: -1, air: 0, tx: 0, ty: 0, sx: 0, sy: 0, fl: 0, dead: false, active: false, hard: false, summoned: false, r: 36 }; }
+  function mkMonk() { const p = at(10, 5); return { kind: 'boss', type: 'monk', x: p.x, y: p.y, hp: 190, maxHp: 190, fireT: 1.6, ringT: 4, fl: 0, dead: false, active: false, show: true, hard: false, summoned: false, r: 44, hy: 62 }; }
+  function mkLoco() { const p = at(31, 7); return { kind: 'boss', type: 'loco', x: p.x, y: p.y, hp: 175, maxHp: 175, st: 'idle', t: 1.8, steamT: 2.4, face: -1, cdx: 0, cdy: 0, fl: 0, dead: false, active: false, show: false, hard: false, summoned: false, r: 46, hy: 40 }; }
+  function mkBoss() { const p = at(29, 9); return { kind: 'boss', type: 'cat', show: false, x: p.x, y: p.y, hp: 150, maxHp: 150, st: 'walk', t: 2.5, leapT: 2.6, shardT: 2.8, face: -1, air: 0, tx: 0, ty: 0, sx: 0, sy: 0, fl: 0, dead: false, active: false, hard: false, summoned: false, r: 36 }; }
 
   /* ================= 状態 ================= */
   let mode = 'title', S = null;
@@ -776,20 +786,23 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
   }
   /* ---- 店 ---- */
   const SHOPS = [
-    { x: 5, name: 'アロンアルファ屋', goods: () => [{ name: 'super glue', desc: '割れた物を、繋ぎ合わせられる。', price: 15, can: () => !S.items.__raw.glue, buy: () => { S.items.glue = true; } }] },
+    { x: 5, name: 'アロンアルファ屋', goods: () => [{ name: 'super glue', desc: '割れた物を、繋ぎ合わせられる。', price: 15, owned: () => !!S.items.__raw.glue, can: () => !S.items.__raw.glue, note: '手持ちに入った。', buy: () => { S.items.glue = true; } }] },
     { x: 11, name: '道具屋', goods: () => [
-      { name: 'wine', desc: 'Qで飲むと、体力が回復する。(最大9本)', price: 20, can: () => S.items.__raw.wine < 9, buy: () => { S.items.wine++; } },
-      { name: 'heart cookie', desc: '体力が、その場で2回復する。', price: 10, can: () => S.hp < S.maxHp, buy: () => { S.hp = Math.min(S.maxHp, S.hp + 2); } }] },
-    { x: 17, name: '武器屋', goods: () => { const L = []; for (const id of S.party) for (let t = 1; t <= 2; t++) L.push({ name: WNAME[id][t], desc: NAMES[id] + ' の武器。攻撃力 ×' + WMUL[t], price: WPRICE[t], can: () => !S.own[id].includes(t), owned: () => S.own[id].includes(t), buy: () => { S.own[id].push(t); } }); return L; } },
-    { x: 23, name: '盾屋', goods: () => [1, 2, 3].map(t => ({ name: SNAME[t], desc: '受けるダメージ −' + Math.round(SRED[t] * 100) + '%' + (t === 3 ? '。飛んでくる弾も、跳ね返せる。' : ''), price: SPRICE[t], can: () => !S.ownS.includes(t), owned: () => S.ownS.includes(t), buy: () => { S.ownS.push(t); } })) }];
+      { name: 'wine', desc: 'Qで飲むと、体力が回復する。(最大9本)', price: 20, have: () => S.items.__raw.wine + ' 本', full: 'もう持てない', can: () => S.items.__raw.wine < 9, note: '手持ちに入った。', buy: () => { S.items.wine++; } },
+      { name: 'heart cookie', desc: '体力が、その場で2回復する。', price: 10, full: '体力は満タン', can: () => S.hp < S.maxHp, note: '体力が回復した。', buy: () => { S.hp = Math.min(S.maxHp, S.hp + 2); } }] },
+    { x: 17, name: '武器屋', goods: () => { const L = []; for (const id of S.party) for (let t = 1; t <= 2; t++) L.push({ name: WNAME[id][t], desc: NAMES[id] + ' の武器。攻撃力 ×' + WMUL[t], price: WPRICE[t], can: () => !S.own[id].includes(t), owned: () => S.own[id].includes(t), note: '袋に入った。Cキーで取り出して装備しよう。', buy: () => { S.own[id].push(t); } }); return L; } },
+    { x: 23, name: '盾屋', goods: () => [1, 2, 3].map(t => ({ name: SNAME[t], desc: '受けるダメージ −' + Math.round(SRED[t] * 100) + '%' + (t === 3 ? '。飛んでくる弾も、跳ね返せる。' : ''), price: SPRICE[t], can: () => !S.ownS.includes(t), owned: () => S.ownS.includes(t), note: '袋に入った。Cキーで取り出して装備しよう。', buy: () => { S.ownS.push(t); } })) }];
   let curShop = null, shopRes = null;
-  function openShop(sh) { return new Promise(res => { curShop = sh; shopRes = res; mode = 'shop'; S.freeze = true; renderShop(); $('shop').hidden = false; Snd.play('chest'); }); }
+  function openShop(sh) { return new Promise(res => { curShop = sh; shopRes = res; shMsg = ''; mode = 'shop'; S.freeze = true; renderShop(); $('shop').hidden = false; Snd.play('chest'); }); }
+  let shMsg = '';
   function renderShop() {
-    $('shname').textContent = curShop.name; $('shgold').textContent = '所持金  ' + S.gold + ' G'; const ul = $('shlist'); ul.textContent = '';
+    $('shname').textContent = curShop.name; $('shgold').textContent = '所持金  ' + S.gold + ' G'; $('shmsg').textContent = shMsg; const ul = $('shlist'); ul.textContent = '';
     for (const g of curShop.goods()) {
-      const li = document.createElement('li'), nm = document.createElement('span'), b = document.createElement('button'); nm.className = 'nm'; nm.textContent = g.name + '  ' + g.price + ' G\n' + g.desc; nm.style.whiteSpace = 'pre-line';
-      const owned = g.owned && g.owned(), ok = g.can() && S.gold >= g.price; b.type = 'button'; b.textContent = owned ? '持っている' : '買う'; b.disabled = owned || !ok;
-      b.addEventListener('click', () => { if (!g.can() || S.gold < g.price) return; S.gold -= g.price; g.buy(); Snd.play('buy'); renderShop(); }); li.append(nm, b); ul.append(li);
+      const li = document.createElement('li'), nm = document.createElement('span'), b = document.createElement('button'); nm.className = 'nm'; nm.style.whiteSpace = 'pre-line';
+      const owned = g.owned && g.owned(), can = g.can(), afford = S.gold >= g.price, bb = document.createElement('b'), sm = document.createElement('small');
+      bb.textContent = (owned ? '✔ ' : '') + g.name + '   ' + g.price + ' G'; sm.textContent = g.desc + (g.have ? '\n(いま ' + g.have() + ')' : ''); sm.style.whiteSpace = 'pre-line'; nm.append(bb, sm);
+      b.type = 'button'; b.textContent = owned ? '✔ 持っている' : !can ? (g.full || '買えない') : !afford ? 'お金が足りない' : '買う'; b.disabled = owned || !can || !afford; li.classList.toggle('owned', !!owned);
+      b.addEventListener('click', () => { if (!g.can() || S.gold < g.price) return; S.gold -= g.price; g.buy(); shMsg = 'ありがとう! 「' + g.name + '」を買った。' + (g.note ? g.note : ''); Snd.play('buy'); renderShop(); }); li.append(nm, b); ul.append(li);
     }
     const f = ul.querySelector('button:not([disabled])'); if (f) f.focus({ preventScroll: true });
   }
@@ -929,6 +942,8 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       for (const p of S.pick) if (Math.hypot(p.x - hx, p.y - hy) < 24) p.t = 1;
     }
   }
+  // ボスは、プレイヤーのレベルに合わせて、さらに頑丈になる
+  function bossScale(b) { if (b.scaled) return; b.scaled = true; const f = 1 + 0.06 * Math.max(0, (S.lv || 1) - 1); b.maxHp = Math.round(b.maxHp * f); b.hp = b.maxHp; }
   function cutTile(m, i, j) {
     const c = m.g[j][i], floor = m.theme === 'sky' ? 'e' : (m.theme === 'dungeon' || m.theme === 'track' ? '_' : ',');
     setTile(m, i, j, floor); ptFx(i * T + 24, j * T + 24, c === 'l' ? '#d8a040' : '#4f9a5a', 10, 80); Snd.play('hit');
@@ -997,7 +1012,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     if (o.kind === 'dig') {
       if (S.active !== 'pochi') { await dialog([{ w: 'bisco', t: '地面が、少しだけ盛り上がっている。…掘れそうだ。' }]); return; }
       o.done = true; Snd.play('dig'); ptFx(o.x, o.y - 6, '#a98a64', 14, 90); await wait(0.5);
-      if (o.item === 'shard') { give('shard'); await dialog([{ w: 'pochi', t: 'ぽふっ!' }, { w: null, t: '割れた猫細工の破片を見つけた。' }]); }
+      if (o.item === 'shard') { give('shard'); await dialog([{ w: 'pochi', t: 'ワン!' }, { w: null, t: '割れた猫細工の破片を見つけた。' }]); }
       else { S.maxHp += 2; S.hp = S.maxHp; Snd.play('pickup'); await dialog([{ w: null, t: 'ハートの欠片を見つけた。体力の最大値が、増えた。' }]); }
     }
   }
@@ -1057,7 +1072,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     for (const sp of SPOTS) { if (m.id === sp.map && !F[sp.flag] && (!sp.cond || sp.cond()) && Math.hypot(S.x - (sp.tx * T + 24), S.y - (sp.ty * T + 24)) < sp.r * T) { F[sp.flag] = true; S.lock = true; sp.glow(m); await dialog(sp.lines.map(t => ({ w: null, t }))); S.lock = false; return; } }
     if (m.id === 'train' && !F.pochi && m.enemies.every(e => e.dead)) {
       F.pochi = true; S.lock = true; S.fx.length = 0;
-      await dialog([{ w: null, t: '荷物は、大人しくなった。座席で、白い縫いぐるみが目を覚ます。' }, { w: 'pochi', t: '……ぽふ。' }, { w: 'bisco', t: '起きたね。…一緒に来る?' }, { w: 'pochi', t: 'ぽふっ!' }]);
+      await dialog([{ w: null, t: '荷物は、大人しくなった。座席で、白い縫いぐるみが目を覚ます。' }, { w: 'pochi', t: 'ワン…' }, { w: 'bisco', t: '起きたね。…一緒に来る?' }, { w: 'pochi', t: 'ワン!' }]);
       S.party.push('pochi'); Snd.play('win'); m.npcs.find(n => n.pochi).gone = true; m.objs.find(o => o.kind === 'glue').hidden = false;
       await dialog([{ w: null, t: 'Pochi が仲間になった。(Tab・1〜3で切り替え。Z:肉球をなげる / X:地面を掘る)' }, { w: null, t: '座席の上で、何かが光っている。' }]); S.lock = false;
     }
@@ -1083,7 +1098,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
   async function bossStart() {
     const F = S.F, b = S.map.boss; F.bossStart = true; S.lock = true; Snd.music('boss');
     await dialog([{ w: null, t: '割れたガラスの猫が、何度目かの朝を待っていた。' }, { w: 'moon', t: '…壊れ続けているのね。' }, { w: 'bisco', t: '繋ぎ合わせに、来たよ。' }]);
-    b.active = true; b.show = true; S.lock = false;
+    b.active = true; b.show = true; bossScale(b); S.lock = false;
   }
   async function bossDefeated(b) {
     if (b.type === 'monk') return monkDefeated(b);
@@ -1094,7 +1109,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     b.dead = true; b.active = false; S.lock = true; S.eproj.length = 0; Snd.play('bossdown'); S.shake = 0.6;
     for (const e of S.map.enemies) if (!e.dead) killEnemy(e);
     ptFx(b.x, b.y - 40, '#cfe8ff', 50, 160); await wait(1.4); Snd.stop(); S.F.bossDead = true; S.xp += 25; S.gold += 80; checkLevel();
-    await dialog([{ w: null, t: 'ガラスの猫は、粉々になった。それから、ゆっくりと、一つに戻っていった。' }, { w: 'moon', t: 'ほら。繋ぎ合わせれば、また。' }, { w: 'pochi', t: 'ぽふっ!' },
+    await dialog([{ w: null, t: 'ガラスの猫は、粉々になった。それから、ゆっくりと、一つに戻っていった。' }, { w: 'moon', t: 'ほら。繋ぎ合わせれば、また。' }, { w: 'pochi', t: 'ワン!' },
       { w: 'moon', t: '…でも、まだ、壊れているものが、沢山あるわ。' }, { w: 'bisco', t: 'うん。行こう。' }, { w: null, t: '庭の南の生垣が、静かに開いた。' }]);
     openArcadePath(); S.lock = false; await warp({ to: 'garden', tx: 31, ty: 9, dir: 'left' });
     S.lock = true; await dialog([{ w: null, t: '庭の南の道を、行ってみよう。' }]); S.lock = false;
@@ -1206,7 +1221,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
   function respawnEnemies(m) {
     for (const e of m.enemies) {
       if (!e.home || e.noRespawn) continue; const d = EST[e.type];
-      e.dead = false; e.hp = d.hp; e.x = e.hx; e.y = e.hy; e.kx = e.ky = 0; e.stun = 0; e.fl = 0; e.st = 0; e.t = 1 + Math.random() * 2;
+      e.dead = false; e.hp = e.maxhp || d.hp; e.x = e.hx; e.y = e.hy; e.kx = e.ky = 0; e.stun = 0; e.fl = 0; e.st = 0; e.t = 1 + Math.random() * 2;
       if (Math.hypot(e.x - S.x, e.y - S.y) < 220) e.stun = 1.2;
     }
   }
@@ -1243,7 +1258,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
   async function locoStart() {
     const F = S.F, b = S.map.boss; F.locoStart = true; S.lock = true; Snd.music('boss');
     if (!F.locoSeen) { F.locoSeen = true; await dialog([{ w: null, t: '空を行く、引っ繰り返った蒸気機関車。雲を撒き散らしながら、こちらを見ている。' }, { w: 'moon', t: '…止まりたいのに、止まれないのね。' }, { w: 'bisco', t: '止めてあげよう。' }]); }
-    b.active = true; b.show = true; S.lock = false;
+    b.active = true; b.show = true; bossScale(b); S.lock = false;
   }
   function updLoco(b, dt, m) {
     if (!b.active || b.dead) return; b.fl = Math.max(0, b.fl - dt); b.hard = b.hp <= b.maxHp / 2; b.rage = b.hp <= b.maxHp * 0.25;
@@ -1289,7 +1304,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     if (!F.monkSeen) { F.monkSeen = true; await dialog([{ w: null, t: 'マグダラのマリアの寝室。夕暮れだけが、ずっと続いている。' }, { w: null, t: '大きな影が、窓の外を見ていた。' },
       { w: '宇宙暗黒大僧正', t: '……来たか。「おかえり」は、言わぬぞ。' }, { w: 'moon', t: '壊れ続けているのは、貴方?' },
       { w: '宇宙暗黒大僧正', t: '壊れているのは、世界の方だ。拾い上げて繋ぎ合わせ続けるなど、永遠に終わらぬ。' }, { w: 'bisco', t: '終わらなくても、いいんだ。' }, { w: '宇宙暗黒大僧正', t: 'ならば、示してみよ。' }]); }
-    b.active = true; S.lock = false;
+    b.active = true; bossScale(b); S.lock = false;
   }
   function updMonk(b, dt, m) {
     if (!b.active || b.dead) return; b.fl = Math.max(0, b.fl - dt);
@@ -1478,6 +1493,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     for (let i = S.pick.length - 1; i >= 0; i--) { const p = S.pick[i]; p.t += dt; if (Math.hypot(p.x - S.x, p.y - S.y) < 24 && p.t > 0.3) { if (p.item === 'heart') { S.hp = Math.min(S.maxHp, S.hp + 2); Snd.play('pickup'); popup('+', p.x, p.y - 20); } else if (p.item === 'gold') { S.gold += p.v; Snd.play('coin'); popup('+' + p.v + 'G', p.x, p.y - 20); } rm(S.pick, i); } }
     if (S.pendLv > 0 && !S.lock && !S.freeze) openLevelUp();
     // ひとこと(どうしようかな)
+    if (S.afk > 6 && !S.idleMsg) { S.idleMsg = true; popup('…ぼんやり。動くと元に戻るよ', S.x, S.y - 80); }
     { const foe = m.enemies.some(e => !e.dead && Math.hypot(e.x - S.x, e.y - S.y) < 340) || (m.boss && m.boss.active && !m.boss.dead); if (anyIn || S.lock || foe || S.inv > 0 || S.tiltT > 0 || S.spAct || keys.xh) S.afk = 0; else S.afk += dt; }
     if (anyIn || S.lock) { S.idle = 0; S.hint = ''; } else { S.idle += dt; if (S.idle > 9 && !S.hint) { S.hint = hintNow(); S.hintT = 6; glowTiles(hintTargets(m), 6); } }
     if (S.hint) { S.hintT -= dt; if (S.hintT <= 0) { S.hint = ''; S.idle = 3; } }
@@ -1758,6 +1774,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     requestAnimationFrame(frame);
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     try { if (S && (mode === 'play' || mode === 'talk' || mode === 'items' || mode === 'shop' || mode === 'levelup')) update(dt); } catch (err) { console.error(err); reportErr('update: ' + (err && err.message)); }
+    try { const need = !COARSE && !!S && mode === 'play' && S.afk > 8 && !document.hasFocus(); if ($('kbnote').hidden === need) $('kbnote').hidden = !need; } catch (err) {}
     try { $('touch').style.visibility = (mode === 'play' && S && !EG) ? 'visible' : 'hidden'; } catch (err) {}
     try { const showT = !!S && $('title').hidden && mode !== 'confirm'; if ($('tbk').hidden === showT) $('tbk').hidden = !showT; } catch (err) {}
     try { draw(); } catch (err) { console.error(err); reportErr('draw: ' + (err && err.message)); }
