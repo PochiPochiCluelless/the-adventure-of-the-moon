@@ -101,17 +101,17 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           <ul class="rules">
           <li><b>移動</b> 矢印キー / WASD / 画面をドラッグ</li>
           <li><b>攻撃</b> 自動(敵や仕掛けのボタンが近くにあると、自動で攻撃)</li>
+          <li><b>キャラ交代</b> 左下のキャラの顔をタップ(Tab・1〜3キーでも交代)</li>
           <li><b>X</b> 調べる・話す・直す・掘る・押す。押しながら移動でダッシュ(薄い壁を摺り抜ける)</li>
           <li><b>C</b> 持ち物(手持ち / 袋)</li>
           <li><b>Space / キャラをダブルタップ</b> 特別な技(ゲージが溜まったら)</li>
           <li><b>T / キャラ以外をダブルタップ</b> 首を傾げる(おかしな所を探す)</li>
-          <li><b>Tab / 1・2・3 / 左下の顔</b> キャラを切り替える</li>
           <li><b>遠くのボタン</b> Pochi の肉球で押せる(Pochi に切り替えて近づく)</li>
           <li><b>Q / wine の表示をタップ</b> ワインを飲む</li>
           <li><b>M</b> この説明を開く / 閉じる</li>
           <li><b>光</b> 金色に光る所は、説明されている場所</li>
         </ul>
-          <p class="hint">スマホは、画面をドラッグして動きます。何もしないでいると…。</p>
+          <p class="hint">スマホは、画面をドラッグして動きます。仲間が増えたら、左下の顔をタップして交代しよう。</p>
           <div class="row"><button id="next" type="button">start</button></div>
         </div>
       </div>
@@ -455,7 +455,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
           NP(5, 2, '#a8864a', '#e0e0e0', [{ w: 'アロンアルファ屋', t: 'いらっしゃい。' }]), NP(11, 2, '#c85a5a', '#222', [{ w: '道具屋', t: 'いらっしゃい。' }]),
           NP(17, 2, '#5a6a8a', '#6a4a30', [{ w: '武器屋', t: 'いらっしゃい。' }]), NP(23, 2, '#6a8a5a', '#444', [{ w: '盾屋', t: 'いらっしゃい。' }]),
           NP(14, 6, '#c8a05a', '#222', [{ w: '昆布豆腐の店主', t: '昆布豆腐とミルクコーヒーと、アンクルトリス。日常は、大体この三つでできている。' }]),
-          NP(20, 6, '#8a6aa8', '#4a3020', [{ w: '首を傾げる少女', t: '可笑しいなと思ったら、首を傾げてみて。(スペースキー)' }, { w: '首を傾げる少女', t: '壁の向こうが、見えることがあるの。' }]),
+          NP(20, 6, '#8a6aa8', '#4a3020', [{ w: '首を傾げる少女', t: '可笑しいなと思ったら、首を傾げてみて。(画面をダブルタップ / Tキー)' }, { w: '首を傾げる少女', t: '壁の向こうが、見えることがあるの。' }]),
           NP(28, 6, '#5a8aa8', '#6a6a6a', [{ w: '買い物客', t: 'このアーケード、昨日より長くなってない?' }, { w: '買い物客', t: '…まあ、いいか。' }, { w: '買い物客', t: '線路の奥の壁に、灯りが三つ並んでるんだって。夕焼けみたいに、真ん中から、灯すらしいよ。' }])],
         enemies: [], objs: [], act: {}, tilts: [{ x: at(24, 8).x, y: at(24, 8).y, r: 150, done: false, fn: 'secret' }] };
       for (const [sx, nm] of [[5, 'アロンアルファ屋'], [11, '道具屋'], [17, '武器屋'], [23, '盾屋']]) W.arcade.objs.push({ kind: 'sign', x: sx * T + 24, y: 2 * T - 8, text: nm, done: true });
@@ -653,7 +653,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     const F = S.F;
     if (id === 'train' && !F.trainSeen) { F.trainSeen = true; await fadeTo(0, 0.2); await dialog([{ w: 'bisco', t: '誰もいない。…荷物だけが、座席の上で震えている。' }]); }
     if (id === 'arcade' && !F.arcSeen) { F.arcSeen = true; await fadeTo(0, 0.2); await dialog([{ w: null, t: 'アーケード商店街。シャッターの向こうから、昆布豆腐の匂いがする。' }, { w: 'moon', t: 'どのお店も、閉まっているのね。…それとも、開きかけ?' }]); }
-    if (id === 'track' && !F.trackSeen) { F.trackSeen = true; await fadeTo(0, 0.2); await dialog([{ w: null, t: '記憶が摺り抜ける線路。' }, { w: 'bisco', t: '壁が、薄い。…走り抜ければ、摺り抜けられそうだ。' }, { w: null, t: '(Shiftを押しながら移動。長くは続かない)' }]); }
+    if (id === 'track' && !F.trackSeen) { F.trackSeen = true; await fadeTo(0, 0.2); await dialog([{ w: null, t: '記憶が摺り抜ける線路。' }, { w: 'bisco', t: '壁が、薄い。…走り抜ければ、摺り抜けられそうだ。' }, { w: null, t: '(Xを押しながら移動。長くは続かない)' }]); }
     if (id === 'dungeon' && !F.dunSeen) { F.dunSeen = true; await fadeTo(0, 0.2); await dialog([{ w: null, t: 'ガラスの猫の工房。' }, { w: 'bisco', t: '何度も割れて、何度も直された音が、する。' }]); }
   }
   async function runIntro() {
@@ -1028,9 +1028,9 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       case 'S': await dialog([{ w: null, t: 'station sign: "moon st."' }, { w: null, t: 'next stop: "welcome back"' }]); break;
       case 'b': await dialog([{ w: null, t: 'ベンチ。誰かの体温が、少しだけ残っている。' }]); break;
       case 'W': await dialog([{ w: null, t: '窓の外は、ずっと夕方だ。' }]); break;
-      case 'G': await dialog([{ w: null, t: '家と家の、狭い隙間。' }, { w: 'bisco', t: S.party.includes('pochi') ? 'Pochi なら、通れそうだ。(Tabで切り替え)' : '狭くて、通れそうにない。' }]); break;
+      case 'G': await dialog([{ w: null, t: '家と家の、狭い隙間。' }, { w: 'bisco', t: S.party.includes('pochi') ? 'Pochi なら、通れそうだ。(左下の顔をタップ / Tabで切り替え)' : '狭くて、通れそうにない。' }]); break;
       case 'F': await dialog([{ w: null, t: '柵が閉まっている。' }, { w: 'bisco', t: 'どこかに、仕掛けが有りそうだ。' }]); break;
-      case 'V': await dialog([{ w: null, t: '蔓が、道を塞いでいる。' }, { w: 'bisco', t: S.party.includes('moon') ? 'moon の髪なら、切れそうだ。(Tabで切り替え)' : '切るものが、欲しい。' }]); break;
+      case 'V': await dialog([{ w: null, t: '蔓が、道を塞いでいる。' }, { w: 'bisco', t: S.party.includes('moon') ? 'moon の髪なら、切れそうだ。(左下の顔をタップ / Tabで切り替え)' : '切るものが、欲しい。' }]); break;
       case 'l': await dialog([{ w: null, t: '落ち葉の山。肉球や髪で、退かせそうだ。' }]); break;
       case 'P': await dialog([{ w: null, t: '桃の木。さっきより、少し背が伸びた気がする。' }]); break;
       case '~': await dialog([{ w: null, t: '池。水面に、知らない空が映っている。' }]); break;
@@ -1051,10 +1051,10 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
         if (sh.name === 'アロンアルファ屋' && !F.glue2) { await dialog([{ w: 'アロンアルファ屋', t: '割れたものを繋ぐなら、これを持っていきな。' }, { w: 'アロンアルファ屋', t: '最初の一つは、おまけだ。代金は「ただいま」でいい。' }]); F.glue2 = true; give('glue'); await dialog([{ w: null, t: 'アロンアルファを分けて貰った。' }]); }
         await openShop(sh); break; }
       case 'Y': case 'Z': { const L = ['シャッターの降りた店。「昆布豆腐」の貼り紙だけが、風で揺れている。', '店の奥から、ミルクコーヒーの香り。…でも、人影はない。', '「アンクルトリス、あります」と書いた看板が、少し傾いている。', 'ガラスの猫細工の店。どれも、どこかが割れている。']; await dialog([{ w: null, t: L[Math.floor(hash(it.tx, it.ty, 9) * L.length)] }]); break; }
-      case 'q': await dialog([{ w: null, t: 'シャッター。継ぎ目が、少しだけ、ずれているような…。' }, { w: 'bisco', t: S.F.secret ? '' : '(首を傾げてみよう。Space)' }].filter(l => l.t)); break;
+      case 'q': await dialog([{ w: null, t: 'シャッター。継ぎ目が、少しだけ、ずれているような…。' }, { w: 'bisco', t: S.F.secret ? '' : '(首を傾げてみよう。画面をダブルタップ / Tキー)' }].filter(l => l.t)); break;
       case 'X': if (!S.items.ticket) await dialog([{ w: null, t: 'エレベーターの扉。切符がないと、動かないらしい。' }].concat(bagLines('ticket'))); else await warp({ to: 'lift', tx: 4, ty: 6, dir: 'up' }); break;
       case 'd': await dialog([{ w: null, t: '夕暮れだけが続く部屋の、ベッド。誰かが、さっきまで眠っていたようだ。' }]); break;
-      case 'm': await dialog([{ w: null, t: '薄い壁。向こう側が、透けて見える。' }, { w: 'bisco', t: '(Shiftを押しながら、走り抜ける)' }]); break;
+      case 'm': await dialog([{ w: null, t: '薄い壁。向こう側が、透けて見える。' }, { w: 'bisco', t: '(Xを押しながら、走り抜ける)' }]); break;
     }
   }
   async function repairStatue(m) {
@@ -1074,7 +1074,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
       F.pochi = true; S.lock = true; S.fx.length = 0;
       await dialog([{ w: null, t: '荷物は、大人しくなった。座席で、白い縫いぐるみが目を覚ます。' }, { w: 'pochi', t: 'ワン…' }, { w: 'bisco', t: '起きたね。…一緒に来る?' }, { w: 'pochi', t: 'ワン!' }]);
       S.party.push('pochi'); Snd.play('win'); m.npcs.find(n => n.pochi).gone = true; m.objs.find(o => o.kind === 'glue').hidden = false;
-      await dialog([{ w: null, t: 'Pochi が仲間になった。(Tab・1〜3で切り替え。Z:肉球をなげる / X:地面を掘る)' }, { w: null, t: '座席の上で、何かが光っている。' }]); S.lock = false;
+      S.hudGlowT = S.t + 30; await dialog([{ w: null, t: 'Pochi が仲間になった。' }, { w: null, t: '左下のキャラの顔をタップすると、交代できる。(Tab・1〜3キーでも交代)' }, { w: null, t: 'Pochi は肉球を自動で飛ばす。遠くのボタンも押せる。X:地面を掘る。' }, { w: null, t: '座席の上で、何かが光っている。' }]); S.hudGlowT = S.t + 10; S.lock = false;
     }
     if (m.id === 'garden' && !F.collapse && tx > 22.4 && tx < 24.5 && S.y > 9 * T) {
       F.collapse = true; S.lock = true; S.shake = 0.8; Snd.play('thud'); await wait(0.9);
@@ -1093,7 +1093,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     await dialog([{ w: null, t: '黒髪が、風に揺れている。' }, { w: 'moon', t: 'おかえりなさい。' }, { w: 'bisco', t: '…ただいま。' }, { w: 'moon', t: '変わらないね。' }, { w: 'bisco', t: 'そうかな。' }, { w: 'moon', t: '…変わったわ。' },
       { w: 'moon', t: '私も、一緒に行っていい? 壊れたものを、拾いに行くんでしょう。' }, { w: 'bisco', t: '…うん。' }]);
     S.party.push('moon'); n.gone = true; n.hidden = true; Snd.play('win');
-    await dialog([{ w: null, t: 'moon が仲間になった。(Z:髪の斬撃。蔓を切れる)' }]); S.lock = false;
+    S.hudGlowT = S.t + 30; await dialog([{ w: null, t: 'moon が仲間になった。' }, { w: null, t: '左下のキャラの顔をタップすると、交代できる。(Tab・1〜3キーでも交代)' }, { w: null, t: 'moon は髪の斬撃を自動で出す。蔓や、近くのボタンも切れる。' }]); S.hudGlowT = S.t + 10; S.lock = false;
   }
   async function bossStart() {
     const F = S.F, b = S.map.boss; F.bossStart = true; S.lock = true; Snd.music('boss');
@@ -1148,7 +1148,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     { map: 'garden', tx: 12, ty: 14, r: 3.6, flag: 'sp_kill', cond: () => !S.world.garden.gates[0].open, lines: ['生垣の扉。…この庭の敵を、全部倒すと開きそうだ。'], glow: m => { glowTiles([[12, 14]], 6); glowEnemies(m, 7); } },
     { map: 'dungeon', tx: 10, ty: 4, r: 3.4, flag: 'sp_plate', cond: () => !S.world.dungeon.gates[0].open, lines: ['石の扉。…床に、四角い印がある。', 'あの石を押して、印の上に載せよう。(Xで押す)'], glow: m => { glowTiles([[10, 4]], 6); const bt = blockTile(m); if (bt) glowTiles([bt], 6, 0, 1.2); glowTiles(findT(m, '@'), 6, 0, 2.4); } },
     { map: 'track', tx: 7, ty: 4, r: 3.6, flag: 'sp_lamp', cond: () => !S.world.track.gates[0].open, lines: ['壁に、灯りが三つ並んでいる。', '光る順に、触れてみよう。(Xで灯す)'], glow: m => lampDemo(m) },
-    { map: 'sky', tx: 4, ty: 3, r: 4.6, flag: 'sp_cloud', cond: () => !S.world.sky.tilts.find(t => t.fn === 'cloud').done, lines: ['北の空に、浮島と宝箱が見える。…でも、道が無い。', '首を傾げてみよう。(Space)'], glow: m => { glowTiles([[3, 1], [5, 1]], 6); glowTiles([[4, 4], [4, 3]], 6, 0.4, 1.0); } }
+    { map: 'sky', tx: 4, ty: 3, r: 4.6, flag: 'sp_cloud', cond: () => !S.world.sky.tilts.find(t => t.fn === 'cloud').done, lines: ['北の空に、浮島と宝箱が見える。…でも、道が無い。', '首を傾げてみよう。(画面をダブルタップ / Tキー)'], glow: m => { glowTiles([[3, 1], [5, 1]], 6); glowTiles([[4, 4], [4, 3]], 6, 0.4, 1.0); } }
   ];
   function wrapJa(t, maxW) {
     const toks = t.match(/[A-Za-z0-9_.:+\-%()\/'’"]+|\s+|[\s\S]/g) || [], NO = '、。,.!?」』)）・…ー', lines = []; let cur = '';
@@ -1411,13 +1411,13 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     }
     if (m.id === 'arcade') {
       if (!F.glue2) return '「アロンアルファ屋」の看板の下の、カウンターで話しかけよう。';
-      if (!F.secret) return '…壁がおかしい。首を傾げてみよう。(Space)';
+      if (!F.secret) return '…壁がおかしい。首を傾げてみよう。(画面をダブルタップ / Tキー)';
       if (!I.ticket) return '開いたシャッターの奥へ、行ってみよう。';
       return 'アーケードの東の、エレベーターへ。';
     }
-    if (m.id === 'track') return I.ticket ? '切符を持って、戻ろう。' : '壁が薄い。Shiftを押しながら、走り抜けよう。';
+    if (m.id === 'track') return I.ticket ? '切符を持って、戻ろう。' : '壁が薄い。Xを押しながら、走り抜けよう。';
     if (m.id === 'lift') return 'ボタンを、直そう。';
-    if (m.id === 'sky') return !F.sksw ? '雲の隙間の向こうに、スイッチが見える。帽子が届きそうだ。' : '薄い壁は、Shiftを押しながら摺り抜けよう。';
+    if (m.id === 'sky') return !F.sksw ? '雲の隙間の向こうに、スイッチが見える。帽子が届きそうだ。' : '薄い壁は、Xを押しながら摺り抜けよう。';
     return '…どうしようかな。';
   }
 
@@ -1753,7 +1753,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     const vg = ctx.createRadialGradient(VW / 2, VH / 2, Math.min(VW, VH) * 0.35, VW / 2, VH / 2, Math.max(VW, VH) * 0.72); vg.addColorStop(0, 'rgba(0,0,10,0)'); vg.addColorStop(1, m.theme === 'dungeon' ? 'rgba(0,0,10,0.7)' : 'rgba(0,0,10,0.45)'); ctx.fillStyle = vg; ctx.fillRect(0, 0, VW, VH);
     // HUD
     for (let i = 0; i < S.maxHp / 2; i++) drawHeart(12 + i * 32, 12, clamp(S.hp - i * 2, 0, 2));
-    S.party.forEach((id, k) => { const x = 12 + k * 52, y = VH - 62, A = ATL[id]; ctx.fillStyle = id === S.active ? 'rgba(255,220,150,.95)' : 'rgba(10,6,16,.7)'; ctx.fillRect(x - 3, y - 3, 48, 48); if (A.face_im === undefined) { A.face_im = new Image(); A.face_im.src = A.face; } if (A.face_im.complete) { ctx.globalAlpha = id === S.active ? 1 : 0.6; ctx.drawImage(A.face_im, x, y, 42, 42); ctx.globalAlpha = 1; } ctx.fillStyle = '#fff3d8'; ctx.font = '10px "Shippori Mincho", "Hiragino Mincho ProN", serif'; ctx.textAlign = 'left'; ctx.fillText(String(k + 1), x + 2, y + 12); });
+    S.party.forEach((id, k) => { const x = 12 + k * 52, y = VH - 62, A = ATL[id]; ctx.fillStyle = id === S.active ? 'rgba(255,220,150,.95)' : 'rgba(10,6,16,.7)'; ctx.fillRect(x - 3, y - 3, 48, 48); if (S.hudGlowT > S.t && S.party.length > 1) { const pu = 0.55 + 0.45 * Math.sin(S.t * 7); ctx.strokeStyle = 'rgba(255,236,150,' + pu + ')'; ctx.lineWidth = 3; ctx.strokeRect(x - 6, y - 6, 54, 54); if (k === 0) { ctx.font = '12px "Shippori Mincho", "Hiragino Mincho ProN", serif'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(255,236,150,' + pu + ')'; ctx.fillText('tap a face to switch', x, y - 12); } } if (A.face_im === undefined) { A.face_im = new Image(); A.face_im.src = A.face; } if (A.face_im.complete) { ctx.globalAlpha = id === S.active ? 1 : 0.6; ctx.drawImage(A.face_im, x, y, 42, 42); ctx.globalAlpha = 1; } ctx.fillStyle = '#fff3d8'; ctx.font = '10px "Shippori Mincho", "Hiragino Mincho ProN", serif'; ctx.textAlign = 'left'; ctx.fillText(String(k + 1), x + 2, y + 12); });
     if (S.slipE < 99 || S.slip) { ctx.fillStyle = 'rgba(10,6,16,.7)'; ctx.fillRect(12, 40, 86, 8); ctx.fillStyle = S.slipE < 12 ? '#e0805a' : '#9fd8f0'; ctx.fillRect(13, 41, 84 * S.slipE / 100, 6); }
     for (let i = 0; i < S.up.barrier; i++) { ctx.fillStyle = i < S.barrier ? '#7fc8ff' : 'rgba(40,60,90,.7)'; ctx.beginPath(); ctx.arc(18 + i * 18, 62, 6, 0, 6.283); ctx.fill(); ctx.strokeStyle = '#0b0a0e'; ctx.lineWidth = 2; ctx.stroke(); }
     ctx.fillStyle = 'rgba(10,6,16,.7)'; ctx.fillRect(12, 74, 86, 8); ctx.fillStyle = S.sp >= 100 ? '#ffd84d' : '#c8983a'; ctx.fillRect(13, 75, 84 * S.sp / 100, 6);
